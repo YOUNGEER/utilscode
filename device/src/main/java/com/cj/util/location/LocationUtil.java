@@ -9,11 +9,12 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.LogPrinter;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.content.PermissionChecker;
-import android.util.Log;
-import android.util.LogPrinter;
 
 import java.util.List;
 
@@ -154,7 +155,6 @@ public class LocationUtil {
         void onLocationFailed();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     private boolean lacksPermissions(String[] permissions) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             return false;
