@@ -7,7 +7,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
-import android.support.annotation.RequiresPermission
 import android.telephony.TelephonyManager
 import android.text.TextUtils
 
@@ -22,6 +21,7 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.net.wifi.WifiManager
 import com.cj.util.PackagedApp
+import com.cl.library.utils.AppUtils
 
 /**
  * <pre>
@@ -143,8 +143,7 @@ object PhoneUtils {
      * @return the unique device id
      */
     val deviceId: String
-        @SuppressLint("HardwareIds")
-        @RequiresPermission(READ_PHONE_STATE)
+        @SuppressLint("HardwareIds", "MissingPermission")
         get() {
             if (Build.VERSION.SDK_INT >= 29) {
                 return ""
@@ -167,8 +166,7 @@ object PhoneUtils {
      * @return the serial of device
      */
     val serial: String
-        @SuppressLint("HardwareIds")
-        @RequiresPermission(READ_PHONE_STATE)
+        @SuppressLint("HardwareIds", "MissingPermission")
         get() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) Build.getSerial() else Build.SERIAL
 
 
@@ -177,7 +175,6 @@ object PhoneUtils {
      * Android 10 获取不到，target<=28即可
      */
     val imei: String?
-        @RequiresPermission(READ_PHONE_STATE)
         get() = getImeiOrMeid(true)
 
 
@@ -186,11 +183,9 @@ object PhoneUtils {
      * Android 10 获取不到，target<=28即可
      */
     val meid: String?
-        @RequiresPermission(READ_PHONE_STATE)
         get() = getImeiOrMeid(false)
 
-    @SuppressLint("HardwareIds")
-    @RequiresPermission(READ_PHONE_STATE)
+    @SuppressLint("HardwareIds", "MissingPermission")
     fun getImeiOrMeid(isImei: Boolean): String? {
         if (Build.VERSION.SDK_INT >= 29) {
             return ""
@@ -300,8 +295,7 @@ object PhoneUtils {
      * @return the IMSI
      */
     val imsi: String
-        @SuppressLint("HardwareIds")
-        @RequiresPermission(READ_PHONE_STATE)
+        @SuppressLint("HardwareIds", "MissingPermission")
         get() = telephonyManager.subscriberId
 
     /**
@@ -329,7 +323,7 @@ object PhoneUtils {
 
 
      val telephonyManager: TelephonyManager
-        get() = Utils.getApp().getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+        get() = AppUtils.context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
 
 
 }

@@ -4,9 +4,9 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Build
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.annotation.RequiresApi
+import androidx.annotation.RequiresApi
 import android.util.Log
 import android.webkit.PermissionRequest
 import com.cj.util.location.LocationUtil
