@@ -1,27 +1,19 @@
 package com.cj.util.info
 
 import android.annotation.SuppressLint
-import android.app.Application
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ApplicationInfo
+import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.net.wifi.WifiManager
 import android.os.Build
 import android.telephony.TelephonyManager
 import android.text.TextUtils
-
-import com.cj.util.Utils
-
-import java.lang.reflect.InvocationTargetException
-import java.lang.reflect.Method
-
-import android.Manifest.permission.CALL_PHONE
-import android.Manifest.permission.READ_PHONE_STATE
-import android.content.pm.ApplicationInfo
-import android.content.pm.PackageInfo
-import android.net.wifi.WifiManager
 import com.cj.util.PackagedApp
 import com.cl.library.utils.AppUtils
+import java.lang.reflect.InvocationTargetException
 
 /**
  * <pre>
@@ -186,17 +178,26 @@ object PhoneUtils {
         get() = getImeiOrMeid(false)
 
     @SuppressLint("HardwareIds", "MissingPermission")
-    fun getImeiOrMeid(isImei: Boolean): String? {
+    fun getImeiOrMeid(isImei: Boolean, position: Int = -1): String? {
         if (Build.VERSION.SDK_INT >= 29) {
             return ""
         }
         val tm = telephonyManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            return if (isImei) {
-                getMinOne(tm.getImei(0), tm.getImei(1))
+            if (position == -1) {
+                return if (isImei) {
+                    getMinOne(tm.getImei(0), tm.getImei(1))
+                } else {
+                    getMinOne(tm.getMeid(0), tm.getMeid(1))
+                }
             } else {
-                getMinOne(tm.getMeid(0), tm.getMeid(1))
+                return if (isImei) {
+                    tm.getImei(position)
+                } else {
+                    tm.getMeid(position)
+                }
             }
+
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             val ids =
                 getSystemPropertyByReflect(if (isImei) "ril.gsm.imei" else "ril.cdma.meid")
@@ -245,7 +246,16 @@ object PhoneUtils {
                     id1 = ""
                 }
             }
-            return getMinOne(id0, id1)
+            if (position == -1) {
+                return getMinOne(id0, id1)
+            } else {
+                if (position == 0) {
+                    return id0
+                } else if (position == 1) {
+                    return id1
+                }
+            }
+
         } else {
             val deviceId = tm.deviceId
             if (isImei) {
@@ -321,8 +331,7 @@ object PhoneUtils {
         }
 
 
-
-     val telephonyManager: TelephonyManager
+    val telephonyManager: TelephonyManager
         get() = AppUtils.context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
 
 

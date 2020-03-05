@@ -8,7 +8,6 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
-
 import com.cj.util.info.PhoneUtils;
 
 import java.lang.reflect.InvocationTargetException;
@@ -247,9 +246,7 @@ public class NetworkUtil {
         }
         return -1;
 
-
     }
-
 
 }
 
