@@ -177,6 +177,9 @@ object PhoneUtils {
     val meid: String?
         get() = getImeiOrMeid(false)
 
+    /**
+     * position: 0,第一个 1，第二个
+     */
     @SuppressLint("HardwareIds", "MissingPermission")
     fun getImeiOrMeid(isImei: Boolean, position: Int = -1): String? {
         if (Build.VERSION.SDK_INT >= 29) {
