@@ -169,7 +169,6 @@ object PhoneUtils {
     val imei: String?
         get() = getImeiOrMeid(true)
 
-
     /**
      * 需要state权限
      * Android 10 获取不到，target<=28即可
