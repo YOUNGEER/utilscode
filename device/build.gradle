@@ -5,7 +5,6 @@ android {
     compileSdkVersion 28
     buildToolsVersion "29.0.0"
 
-
     defaultConfig {
         minSdkVersion 19
         targetSdkVersion 28
@@ -18,8 +17,10 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "boolean", "ENABLE_DEBUG", "false"
+        }
+        debug {
+            buildConfigField "boolean", "ENABLE_DEBUG", "true"
         }
     }
 
@@ -30,4 +31,9 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.annotation:annotation:1.1.0'
     implementation 'androidx.core:core:1.2.0'
+    api 'io.reactivex.rxjava2:rxkotlin:2.2.0'
+    api 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    api 'com.orhanobut:logger:2.1.1'
+
+
 }

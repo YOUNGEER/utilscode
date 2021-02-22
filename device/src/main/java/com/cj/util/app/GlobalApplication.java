@@ -6,13 +6,14 @@ import android.os.Handler;
 
 
 /**
- * Created by Horrarndoo on 2017/9/1.
+ * 2017/9/1.
  * <p>
  * 全局Application
  */
 
 public class GlobalApplication extends Application {
     protected static Context context;
+    protected static Application application;
     protected static Handler handler;
     protected static int mainThreadId;
 
@@ -22,6 +23,7 @@ public class GlobalApplication extends Application {
     public void onCreate() {
         super.onCreate();
         context = getApplicationContext();
+        application = this;
         handler = new Handler();
         mainThreadId = android.os.Process.myTid();
 
@@ -50,6 +52,16 @@ public class GlobalApplication extends Application {
      */
     public static Context getContext() {
         return context;
+    }
+
+
+    /**
+     * 获取上下文对象
+     *
+     * @return context
+     */
+    public static Application getApplication() {
+        return application;
     }
 
     /**

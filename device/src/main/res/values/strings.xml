@@ -1,3 +1,22 @@
 <resources>
+
     <string name="app_name">device</string>
+    <string name="login_phone_empty">请输入手机号码</string>
+    <string name="login_code_empty">请输入验证码</string>
+    <string name="login_phone_error">手机号码不正确</string>
+
+
+    <string name="date_ago_text_1">刚刚</string>
+    <string name="date_ago_text_0">今天</string>
+    <string name="date_ago_text_2">%1$d秒前</string>
+    <string name="date_ago_text_3">%1$d分钟前</string>
+    <string name="date_ago_text_4">%1$d小时前</string>
+    <string name="date_ago_text_5">%1$d天前</string>
+    <string name="date_ago_text_6">%1$d周前</string>
+    <string name="date_ago_text_7">%1$d月前</string>
+    <string name="date_ago_text_8">%1$d年前</string>
+
+
+    <string name="copy_success">复制内容成功</string>
+
 </resources>

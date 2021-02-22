@@ -4,11 +4,10 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.annotation.RequiresApi
 import android.util.Log
-import android.webkit.PermissionRequest
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import com.cj.util.location.LocationUtil
 
 class MainActivity : AppCompatActivity() {
@@ -29,7 +28,6 @@ class MainActivity : AppCompatActivity() {
                 11
             )
         } else {
-
             Log.i("dddddddddd", "11111")
             location()
         }
@@ -46,13 +44,8 @@ class MainActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         if (requestCode == 11) {
-
-            Log.i("dddddddddd", "22222")
             location()
-
         }
-
-
     }
 
 
@@ -61,7 +54,6 @@ class MainActivity : AppCompatActivity() {
         val loca = LocationUtil.getInstance(this)
 
         val last = loca.lastKnowLocation
-
 
         Log.i("dddddddddd", "last::=>" + last)
 

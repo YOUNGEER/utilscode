@@ -1,6 +1,7 @@
 package com.cl.library.utils
 
 import android.app.ActivityManager
+import android.app.Application
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
@@ -32,6 +33,12 @@ object AppUtils {
         get() = GlobalApplication.getContext()
 
     /**
+     * 获取全局applicaiton
+     */
+    val application: Application
+        get() = GlobalApplication.getApplication();
+
+    /**
      * 获取全局handler
      *
      * @return 全局handler
@@ -46,6 +53,22 @@ object AppUtils {
      */
     private val mainThreadId: Int
         get() = GlobalApplication.getMainThreadId()
+
+
+    /**
+     * appinfo
+     */
+    val appInfo = application.packageManager.getApplicationInfo(
+        application.packageName,
+        PackageManager.GET_META_DATA
+    )
+
+    /**
+     * 返回meta数据
+     */
+    public fun metaString(meta: String): String {
+        return appInfo.metaData.getString(meta)
+    }
 
     /**
      * 获取SD卡路径
